@@ -8,10 +8,13 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,24 +43,36 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun fetchNowPlaying() {
-        progress.visibility = View.VISIBLE
+        progress.isVisible = true
+
         lifecycleScope.launch {
             try {
                 val resp = RetrofitInstance.api.getNowPlaying(API_KEY)
+
                 if (resp.isSuccessful) {
                     val movies = resp.body()?.results.orEmpty()
                     adapter.submit(movies)
+                    if (movies.isEmpty()) {
+                        Toast.makeText(this@MainActivity, "No movies found", Toast.LENGTH_SHORT).show()
+                    }
                 } else {
-                    Toast.makeText(this@MainActivity,
-                        "Error: ${resp.code()}",
-                        Toast.LENGTH_SHORT).show()
+                    val msg = withContext(Dispatchers.IO) {
+                        resp.errorBody()?.string()?.take(120)
+                    }
+                    Toast.makeText(
+                        this@MainActivity,
+                        "HTTP ${resp.code()} ${resp.message()}${if (!msg.isNullOrBlank()) "\n$msg" else ""}",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             } catch (e: Exception) {
-                Toast.makeText(this@MainActivity,
-                    "Network error: ${e.localizedMessage}",
-                    Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this@MainActivity,
+                    "Network error: ${e.localizedMessage ?: e.javaClass.simpleName}",
+                    Toast.LENGTH_LONG
+                ).show()
             } finally {
-                progress.visibility = View.GONE
+                progress.isVisible = false
             }
         }
     }

@@ -42,7 +42,6 @@ class MoviesAdapter (
 
     override fun getItemCount(): Int = data.size
 
-    override fun onBindViewHolder(holder: MovieVH, position: Int){
-        holder.bind(data[position])
-    }
+    override fun onBindViewHolder(holder: MovieVH, position: Int) = holder.bind(data[position])
+
 }

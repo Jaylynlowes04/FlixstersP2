@@ -1,5 +1,6 @@
 package com.example.flixsters
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ProgressBar
@@ -16,11 +17,16 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var rv: RecyclerView
     private lateinit var progress: ProgressBar
-    private val adapter = MoviesAdapter()
+    private val adapter = MoviesAdapter(onClick = { movie ->
+        val i = Intent(this, DetailsActivity::class.java)
+        i.putExtra("movie", movie)
+        startActivity(i)
+    })
 
     private val API_KEY = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
 

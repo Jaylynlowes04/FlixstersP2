@@ -1,39 +1,32 @@
-# Android Project 3 - Flixster
+# Android Project 4 - FlixstersP2
 
 Submitted by: Jaylyn Lowes
 
-Flixster is a movie browsing app that allows users to browse movies currently playing in theaters.
+FlixstersP2 is a movie browsing app that allows users to browse ... [TODO] 
 
-Time spent: 4 hours spent in total
+Time spent: 3 hours spent in total
 
 ## Required Features
 
 The following **required** functionality is completed:
 
-- [X] **Make a request to [The Movie Database API's `now_playing`](https://developers.themoviedb.org/3/movies/get-now-playing) endpoint to get a list of current movies**
-- [X] **Parse through JSON data and implement a RecyclerView to display all movies**
-- [X] **Use Glide to load and display movie poster images**
-
-The following **optional** features are implemented:
-
-- [ ] Improve and customize the user interface through styling and coloring
-- [ ] Implement orientation responsivity
-  - App should neatly arrange data in both landscape and portrait mode
-- [ ] Implement Glide to display placeholder graphics during loading
-  - Note: this feature is difficult to capture in a GIF without throttling internet speeds.  Instead, include an additional screencap of your Glide code implementing the feature.  (<10 lines of code)
+- [X] **Choose any endpoint on The MovieDB API except 
+- [X] **Use Glide to load and display at least one image per entry**
+- [X] **Click on an entry to view specific details about that entry using Intents**
 
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-![Flixster](https://github.com/user-attachments/assets/e56d5274-ec6d-4d70-9db1-2d62ac1cf46c)
+![FlixsterP2](https://github.com/user-attachments/assets/002113df-6ab6-469a-8705-903f05cb8a9e)
 
+<!-- Replace this with whatever GIF tool you used! -->
 GIF created with ScreenToGif
 
 ## Notes
 
-Connectivity with the API and making sure the internet was working. 
+Describe any challenges encountered while building the app.
 
 ## License
 

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
 class MoviesAdapter (
+    private val onClick: (Movie) -> Unit,
     private val data: MutableList<Movie> = mutableListOf()
 ) : RecyclerView.Adapter<MoviesAdapter.MovieVH>() {
 
@@ -26,12 +27,9 @@ class MoviesAdapter (
         fun bind(m: Movie) {
             tvTitle.text = m.title
             tvOverview.text = m.overview
-            val url = m.posterUrl()
-            if (url != null) {
-                Glide.with(itemView).load(url).into(ivPoster)
-            } else {
-                ivPoster.setImageDrawable(null)
-            }
+            Glide.with(itemView).load(m.posterUrl()).into(ivPoster)
+
+            itemView.setOnClickListener { onClick(m) }
         }
 
     }
